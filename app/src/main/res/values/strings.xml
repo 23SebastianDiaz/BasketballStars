@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">BasketballStars</string>
+
+
+    //HomeFragment
+    <string name="tittle_home">HoopsHeroes!</string>
+    <string name="slogan_app">Explore the best teams and players in the NBA</string>
+    <string name="get_started">Get started</string>
+
+
+
+</resources>
