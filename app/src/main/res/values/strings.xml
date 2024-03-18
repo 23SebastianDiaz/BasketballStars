@@ -7,6 +7,10 @@
     <string name="slogan_app">Explore the best teams and players in the NBA</string>
     <string name="get_started">Get started</string>
 
+    //LoginFragment
+    <string name="login_subtitle">Join the community of basketball enthusiasts</string>
+    <string name="username">Username: </string>
+    <string name="password">Password: </string>
 
 
 </resources>
