@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "801185203167",
+    "project_id": "basketballstars-56ee9",
+    "storage_bucket": "basketballstars-56ee9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801185203167:android:872dc1d9d0dc2300023a6a",
+        "android_client_info": {
+          "package_name": "com.example.basketballstars"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "801185203167-19av39shjtbvna15qf6jhjjglocg7ha9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv3FXA0dTdo8L3vfZ5_NYY4DIHV0rU74k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "801185203167-19av39shjtbvna15qf6jhjjglocg7ha9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

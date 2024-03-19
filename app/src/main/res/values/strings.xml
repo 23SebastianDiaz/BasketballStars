@@ -9,8 +9,25 @@
 
     //LoginFragment
     <string name="login_subtitle">Join the community of basketball enthusiasts</string>
-    <string name="username">Username: </string>
+    <string name="email">Email: </string>
     <string name="password">Password: </string>
+    <string name="hint_email">Enter Email</string>
+    <string name="hint_password">************</string>
+    <string name="login">Login</string>
+    <string name="new_to_basketball">New to BasketballStars?</string>
 
 
+    //SignUpFragment
+    <string name="username">Username</string>
+    <string name="sing">Sign Up</string>
+    <string name="sing_witch_google">Sign up witch Google</string>
+    <string name="account">Create Account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //Preferences file
+    <string name="prefs_file">com.example.basketballstars.PREFERENCE_FILE_KEY</string>
+
+    //WebClientId
+    <string name="default_web_client_id">801185203167-19av39shjtbvna15qf6jhjjglocg7ha9.apps.googleusercontent.com</string>
 </resources>

@@ -1,6 +1,12 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
+    //Firebase
+    id("com.google.gms.google-services")
+
+    //SafeArgs
+    id ("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -40,10 +46,21 @@ android {
 
 dependencies {
 
+    implementation("androidx.activity:activity-ktx:1.8.2")
+
     //NavComponent
-    val navVersion = "2.7.0"
+    val navVersion = "2.7.7"
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+
+    //SplashScreen
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

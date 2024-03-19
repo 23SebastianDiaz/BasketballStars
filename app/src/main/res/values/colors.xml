@@ -7,5 +7,6 @@
     <color name="background_item">#121212</color>
     <color name="accent">#ff4400</color>
     <color name="secondary">#2B2B2B</color>
+    <color name="hint">#bebebe</color>
 
 </resources>

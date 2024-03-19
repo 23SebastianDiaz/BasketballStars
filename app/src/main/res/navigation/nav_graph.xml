@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/Authentication">
+
+    <navigation android:id="@+id/Authentication"
+        app:startDestination="@id/iniFragment">
+        <fragment
+            android:id="@+id/iniFragment"
+            android:name="com.example.basketballstars.ui.fragments.InitFragment"
+            android:label="fragment_home"
+            tools:layout="@layout/fragment_init">
+            <action
+                android:id="@+id/action_initFragment_to_loginFragment"
+                app:destination="@id/loginFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.example.basketballstars.ui.fragments.LoginFragment"
+            android:label="fragment_login"
+            tools:layout="@layout/fragment_login">
+            <action
+                android:id="@+id/action_loginFragment_to_signUpFragment"
+                app:destination="@id/signUpFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_teamFragment"
+                app:destination="@id/teamFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/signUpFragment"
+            android:name="com.example.basketballstars.ui.fragments.SignUpFragment"
+            android:label="fragment_sign_up"
+            tools:layout="@layout/fragment_sign_up" >
+            <action
+                android:id="@+id/action_signUpFragment_to_teamFragment"
+                app:destination="@id/teamFragment" />
+        </fragment>
+        <action
+            android:id="@+id/action_global_teamFragment"
+            app:destination="@id/teamFragment" />
+    </navigation>
+    <fragment
+        android:id="@+id/teamFragment"
+        android:name="com.example.basketballstars.ui.fragments.TeamFragment"
+        android:label="fragment_team"
+        tools:layout="@layout/fragment_team" >
+        <argument
+            android:name="email"
+            app:argType="string" />
+    </fragment>
+</navigation>
