@@ -13,11 +13,24 @@
         android:gravity="center">
 
 
+        <ImageView
+            android:id="@+id/ivUser"
+            android:layout_width="200dp"
+            android:layout_height="200dp"/>
+
         <TextView
             android:id="@+id/tvEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="sdiaz942@gwiudgad"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textAlignment="center"/>
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="sebstian diaz"
             android:textColor="@color/white"
             android:textSize="28sp"
             android:textAlignment="center"/>

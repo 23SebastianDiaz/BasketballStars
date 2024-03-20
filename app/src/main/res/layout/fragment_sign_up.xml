@@ -34,9 +34,28 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="54dp"
+            android:layout_marginTop="32dp"
             android:orientation="vertical"
             android:paddingHorizontal="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/username"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etUsernameSignUp"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="24dp"
+                android:hint="@string/hint_username"
+                android:drawableEnd="@drawable/ic_username"
+                android:inputType="textEmailAddress"/>
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,7 +90,33 @@
                 android:layout_height="50dp"
                 android:hint="@string/hint_password"
                 app:endIconMode="password_toggle"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:drawableEnd="@drawable/ic_password"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description_password"
+                android:textSize="12sp"
+                android:layout_marginStart="6dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/repeat_password"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/etConfirmPasswordSignUp"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/hint_password"
+                app:endIconMode="password_toggle"
+                android:inputType="textPassword"
+                android:drawableEnd="@drawable/ic_password"/>
 
             <Button
                 android:id="@+id/btnSignUp"

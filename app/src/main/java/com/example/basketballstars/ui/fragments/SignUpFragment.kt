@@ -52,24 +52,34 @@ class SignUpFragment : Fragment() {
     }
 
     private fun signup() { //Registro de usuario
-        val emailSigUp = binding.etEmailSignUp.text
-        val passwordSignUp = binding.etPasswordSignUp.text
+        val username = binding.etUsernameSignUp.text.toString()
+        val emailSignUp = binding.etEmailSignUp.text.toString()
+        val passwordSignUp = binding.etPasswordSignUp.text.toString()
+        val confirmPasswordSignUp = binding.etConfirmPasswordSignUp.text.toString()
+
         //Condicion para no introducir textos vacios
-        if (emailSigUp.isNotEmpty() && passwordSignUp.isNotEmpty()) {
-            FirebaseAuth.getInstance()
-                //Crea el email y el password convirtiendolos a string
-                .createUserWithEmailAndPassword(emailSigUp.toString(), passwordSignUp.toString())
-                .addOnCompleteListener { singUp ->
-                    //Notificar si fue exitosa o no el registro
-                    if (singUp.isSuccessful) {
-                        showHome(singUp.result?.user?.email ?: "") //envia parametros registrados
-                    } else {
-                        showAlert(
-                            "Error de registro",
-                            "Hubo un problema al registrar la cuenta."
-                        ) //muestra error
+        if (username.isNotEmpty() && emailSignUp.isNotEmpty() && passwordSignUp.isNotEmpty() && confirmPasswordSignUp.isNotEmpty()) {
+            if (passwordSignUp == confirmPasswordSignUp){
+                FirebaseAuth.getInstance()
+                    //Crea el email y el password convirtiendolos a string
+                    .createUserWithEmailAndPassword(emailSignUp.lowercase(),passwordSignUp)
+                    .addOnCompleteListener { it ->
+                        //Notificar si fue exitosa o no el registro
+                        if (it.isSuccessful) {
+                            showHome(it.result?.user?.email ?: "", it.result.user?.displayName.toString()) //envia parametros registrados
+                        } else {
+                            showAlert(
+                                "Error de registro",
+                                "Hubo un problema al registrar la cuenta."
+                            ) //muestra error
+                        }
                     }
-                }
+            }else{
+                showAlert("Error Password", "Las contraseñas que ingresaste no coinciden. Por favor, asegúrate de que ambas contraseñas sean iguales")
+            }
+
+        }else {
+            showAlert("Error registro", "Uno o más campos están vacíos. Por favor, completa todos los campos.")
         }
     }
 
@@ -90,8 +100,8 @@ class SignUpFragment : Fragment() {
     //Verifica si la respuesta de la activity corresponde con la autenticacion de google
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == GOOGLE_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+        if (requestCode == GOOGLE_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data) //envia data
             try {
                 //recuperar cuenta de autenticacion
                 val account = task.getResult(ApiException::class.java)
@@ -99,23 +109,25 @@ class SignUpFragment : Fragment() {
                     //recupera credencial
                     val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                     FirebaseAuth.getInstance().signInWithCredential(credential) //envia la autenticacion a firebase
-                        .addOnCompleteListener { signUpGoogle ->
-                            if (signUpGoogle.isSuccessful){
-                                showHome(account.email ?: "")
+                        .addOnCompleteListener {
+                            if (it.isSuccessful){
+                                val currentUser = FirebaseAuth.getInstance().currentUser
+                                val username = currentUser?.displayName ?: ""
+                                showHome(account.email ?: "", username)
                             }else{
                                 showAlert("Error de Google", "No se pudo iniciar sesión con Google. Inténtelo de nuevo.")
                             }
                         }
                 }
             }catch (e: ApiException){
-                showAlert("Error de google", "Se produjo un error al iniciar sesión con Google: ${e.message}")
+                showAlert("Error de google", "Se produjo un error al iniciar sesión con Google")
             }
         }
     }
 
     //navegacion al team fragment
-    private fun showHome(email: String) {
-        val action = SignUpFragmentDirections.actionSignUpFragmentToTeamFragment(email)
+    private fun showHome(email: String, username:String) {
+        val action = SignUpFragmentDirections.actionSignUpFragmentToTeamFragment(email, username)
         findNavController().navigate(action)
     }
 
@@ -136,8 +148,9 @@ class SignUpFragment : Fragment() {
             Context.MODE_PRIVATE
         )
         val email = prefs.getString("email", null)
-        if (email != null) {
-            showHome(email)
+        val username = prefs.getString("username", null)
+        if (email != null && username != null) {
+            showHome(email, username)
         }
     }
 

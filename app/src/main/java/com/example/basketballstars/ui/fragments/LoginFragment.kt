@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
 import com.example.basketballstars.R
 import com.example.basketballstars.databinding.FragmentLoginBinding
@@ -15,7 +16,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 
 class LoginFragment : Fragment() {
-
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!! //Devuelve el _binding sin ser nulo
@@ -55,10 +55,10 @@ class LoginFragment : Fragment() {
             FirebaseAuth.getInstance()
                 //Crea el email y el password convirtiendolos a string
                 .signInWithEmailAndPassword(emailLogin.toString(), passwordlogin.toString())
-                .addOnCompleteListener { singUp->
+                .addOnCompleteListener { login->
                     //Notificar si fue exitosa o no el registro
-                    if (singUp.isSuccessful){
-                        showHome(singUp.result?.user?.email ?: "") //envia parametros registrados
+                    if (login.isSuccessful){
+                        showHome(login.result?.user?.email ?: "", login.result?.additionalUserInfo?.username ?: "") //envia parametros registrados
                     }else{
                         showAlert("Error de Login","No se pudo iniciar sesión. Verifique las credenciales e inténtelo de nuevo") //muestra error
                     }
@@ -66,8 +66,8 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun showHome(email:String){
-        val action = LoginFragmentDirections.actionLoginFragmentToTeamFragment(email)
+    private fun showHome(email:String, username:String){
+        val action = LoginFragmentDirections.actionLoginFragmentToTeamFragment(email, username)
         findNavController().navigate(action)
     }
 
@@ -87,8 +87,9 @@ class LoginFragment : Fragment() {
             Context.MODE_PRIVATE
         )
         val email = prefs.getString("email", null)
-        if (email != null) {
-            showHome(email)
+        val username = prefs.getString("username", null)
+        if (email != null && username != null) {
+            showHome(email, username)
         }
     }
     override fun onCreateView(

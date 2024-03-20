@@ -1,5 +1,6 @@
 package com.example.basketballstars.ui.fragments
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,23 +22,26 @@ class TeamFragment : Fragment() {
 
         val args = TeamFragmentArgs.fromBundle(requireArguments())
         val email = args.email
+        val username = args.username
 
         initUI()
-        setUp(email)
-        saveData(email)
+        setUp(email, username)
+        saveData(email, username)
     }
 
     private fun initUI() {
         initListeners()
     }
 
-    private fun setUp(email:String) {
+    private fun setUp(email: String, username: String) {
         binding.tvEmail.text = email
+        binding.tvUserName.text = username
     }
 
-    private fun saveData(email:String) {
+    private fun saveData(email: String, username: String) {
         val prefs = requireContext().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
         prefs.putString("email", email)
+        prefs.putString("username", username)
         prefs.apply()
     }
 
@@ -46,13 +50,29 @@ class TeamFragment : Fragment() {
     }
 
     private fun logOut() {
-        //Se cierre la sesion y borra datos
-        FirebaseAuth.getInstance().signOut()
         val prefs = requireContext().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
-        prefs.clear()
-        prefs.apply()
+        AlertDialog.Builder(requireContext())
+            .setTitle("Cerrar sesión")
+            .setMessage("¿Estás seguro de que deseas cerrar sesión?")
+            .setPositiveButton("Sí") { _, _ ->
+                prefs.clear()
+                prefs.apply()
+
+                // Se cierra la sesión y borra datos
+                FirebaseAuth.getInstance().signOut()
+                onBackPressed()
+
+            }
+            .setNegativeButton("No", null)
+            .show()
     }
 
+    fun onBackPressed() {
+        // Verificar si estamos en el TeamFragment
+        if (isAdded) { // Asegurar que el fragmento esté añadido a la actividad
+            requireActivity().finish() // Cerrar la actividad
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,4 +81,6 @@ class TeamFragment : Fragment() {
         return binding.root
     }
 }
+
+
 
