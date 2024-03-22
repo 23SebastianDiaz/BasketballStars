@@ -52,13 +52,13 @@ class SignUpFragment : Fragment() {
     }
 
     private fun signup() { //Registro de usuario
-        val username = binding.etUsernameSignUp.text.toString()
         val emailSignUp = binding.etEmailSignUp.text.toString()
         val passwordSignUp = binding.etPasswordSignUp.text.toString()
         val confirmPasswordSignUp = binding.etConfirmPasswordSignUp.text.toString()
+        val username = emailSignUp.substringBefore("@")
 
-        //Condicion para no introducir textos vacios
-        if (username.isNotEmpty() && emailSignUp.isNotEmpty() && passwordSignUp.isNotEmpty() && confirmPasswordSignUp.isNotEmpty()) {
+            //Condicion para no introducir textos vacios
+        if (emailSignUp.isNotEmpty() && passwordSignUp.isNotEmpty() && confirmPasswordSignUp.isNotEmpty()) {
             if (passwordSignUp == confirmPasswordSignUp){
                 FirebaseAuth.getInstance()
                     //Crea el email y el password convirtiendolos a string
@@ -66,7 +66,7 @@ class SignUpFragment : Fragment() {
                     .addOnCompleteListener { it ->
                         //Notificar si fue exitosa o no el registro
                         if (it.isSuccessful) {
-                            showHome(it.result?.user?.email ?: "", it.result.user?.displayName.toString()) //envia parametros registrados
+                            showHome(it.result?.user?.email ?: "", username) //envia parametros registrados
                         } else {
                             showAlert(
                                 "Error de registro",

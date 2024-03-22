@@ -62,6 +62,13 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.android.gms:play-services-auth:21.0.0")
 
+    //Retrofit
+    val retVersion = "2.9.0"
+    implementation ("com.squareup.retrofit2:retrofit:$retVersion")
+    implementation ("com.squareup.retrofit2:converter-gson:$retVersion")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.3.1")
+
+
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")

@@ -1,46 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.TeamFragment">
 
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+    <!--ToolBar-->
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/background_item"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-
-        <ImageView
-            android:id="@+id/ivUser"
-            android:layout_width="200dp"
-            android:layout_height="200dp"/>
-
-        <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="sdiaz942@gwiudgad"
-            android:textColor="@color/white"
-            android:textSize="28sp"
-            android:textAlignment="center"/>
         <TextView
             android:id="@+id/tvUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="sebstian diaz"
+            tools:text="Welcome, Sebastian Diaz!"
             android:textColor="@color/white"
-            android:textSize="28sp"
-            android:textAlignment="center"/>
+            android:textSize="18sp"
+            android:layout_marginStart="12dp"
+            android:background="@color/background_item"
+            android:textStyle="bold"/>
 
-        <Button
-            android:id="@+id/btnLogOut"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:text="LogOut" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_item">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <TextView
+                android:id="@+id/btnLogOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/log_out"
+                android:padding="12dp"
+                android:textColor="@color/accent"
+                android:textStyle="bold"
+                app:fontFamily="@font/poppins_black"
+                android:layout_marginEnd="12dp"
+                android:layout_gravity="end|center"
+                android:background="@color/background_item"/>
 
-</FrameLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="12dp"/>
+
+   
+
+</androidx.constraintlayout.widget.ConstraintLayout>

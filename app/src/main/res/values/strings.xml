@@ -31,4 +31,11 @@
 
     //WebClientId
     <string name="default_web_client_id">801185203167-19av39shjtbvna15qf6jhjjglocg7ha9.apps.googleusercontent.com</string>
+
+    //Team
+    <string name="tittle_team">Team</string>
+    <string name="description_image">image user</string>
+    <string name="log_out">Log Out</string>
+
+
 </resources>

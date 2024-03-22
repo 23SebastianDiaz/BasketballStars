@@ -38,6 +38,7 @@
             android:orientation="vertical"
             android:paddingHorizontal="16dp">
 
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,6 +74,7 @@
                 android:inputType="textPassword"
                 android:drawableEnd="@drawable/ic_password"/>
 
+
             <Button
                 android:id="@+id/btnLogin"
                 style="@style/button_app"
@@ -102,7 +104,8 @@
                     android:text="@string/sing"
                     android:textColor="@color/accent"
                     android:textStyle="bold"
-                    app:fontFamily="@font/poppins_black" />
+                    app:fontFamily="@font/poppins_black"
+                    android:padding="12dp"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

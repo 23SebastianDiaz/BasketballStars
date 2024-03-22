@@ -7,12 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
 import com.example.basketballstars.R
 import com.example.basketballstars.databinding.FragmentLoginBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
+
 
 
 class LoginFragment : Fragment() {
@@ -48,17 +48,20 @@ class LoginFragment : Fragment() {
     private fun navigateSignUp() = findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
 
     private fun login() {
-        val emailLogin = binding.etEmailLogin.text
-        val passwordlogin = binding.etPasswordLogin.text
+        val emailLogin = binding.etEmailLogin.text.toString()
+        val passwordlogin = binding.etPasswordLogin.text.toString()
+        val username = emailLogin.substringBefore("@")
+
+
         //Condicion para no introducir textos vacios
         if (emailLogin.isNotEmpty() && passwordlogin.isNotEmpty()) {
             FirebaseAuth.getInstance()
                 //Crea el email y el password convirtiendolos a string
-                .signInWithEmailAndPassword(emailLogin.toString(), passwordlogin.toString())
+                .signInWithEmailAndPassword(emailLogin, passwordlogin)
                 .addOnCompleteListener { login->
-                    //Notificar si fue exitosa o no el registro
+                    //Notificar si fue exitosa o no el ingreso
                     if (login.isSuccessful){
-                        showHome(login.result?.user?.email ?: "", login.result?.additionalUserInfo?.username ?: "") //envia parametros registrados
+                        showHome(login.result?.user?.email ?: "", username  ) //envia parametros registrados
                     }else{
                         showAlert("Error de Login","No se pudo iniciar sesión. Verifique las credenciales e inténtelo de nuevo") //muestra error
                     }
